@@ -1,0 +1,4 @@
+interface:
+  display_name: "PDF 乐谱转 MSCZ"
+  short_description: "用可替换的 OMR 与 MuseScore 转换乐谱，默认逐小节精校"
+  default_prompt: "请用 $pdf-to-mscz 将我提供的 PDF 乐谱转为 MSCZ，并对照原谱做全谱精校。"
