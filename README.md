@@ -46,3 +46,16 @@ python3 skills/pdf-to-mscz/scripts/inspect_score.py /path/to/score.mscz
 ```
 
 完整流程要求对照原谱、实际保存后重新打开、回读内容，并检查导出 PDF 的每一页；源谱模糊或有歧义的地方会单独记录。
+
+## 许可
+
+© 2026 Yuxuan Jiang（[Essoz](https://github.com/Essoz)）
+
+本仓库内容采用[知识共享 署名-非商业性使用-相同方式共享 4.0 国际许可协议（CC BY-NC-SA 4.0）](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)，完整条款见 [LICENSE](LICENSE)。
+
+- 可以：免费使用、复制、修改和分享
+- 需要：注明出处（作者和本仓库链接）
+- 不可以：用于商业目的，包括出售本 skill 或其改编版本，或把它用作收费产品、收费服务的一部分
+- 改编后再分享，须采用相同的许可协议
+
+如需商业使用，请联系作者获得授权。
