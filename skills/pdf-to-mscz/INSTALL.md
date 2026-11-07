@@ -28,7 +28,7 @@
 
 ## 安装后自检
 
-在解压或安装后的 `pdf-to-mscz` 文件夹里运行下列命令。Windows 可将 `python3` 换成 `py -3`；也可让 agent 按清单核对。
+在 agent 实际加载的 `pdf-to-mscz` 目录运行下列命令。若下载目录里另有解压副本，请同时检查安装目录中 `SKILL.md` 开头的 `metadata.version` 是否与分享包一致。Windows 可将 `python3` 换成 `py -3`；也可让 agent 按清单核对。
 
 ```sh
 python3 scripts/check_install.py
