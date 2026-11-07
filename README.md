@@ -12,30 +12,21 @@ PDF → OMR 识别初稿 → MusicXML → MuseScore
 
 ## 依赖
 
-- **AI agent 与本地工具**：能读取文件、查看谱面并操作桌面应用；本次使用 Codex。所需模型、电脑控制接口和软件安装由使用者自行准备。
+- **AI agent 与本地工具**：能读取文件、查看谱面，并能驱动所选工具的桌面界面或官方命令行。本次使用 Codex；需要安装识别工具时，agent 可以协助。
 - **[MuseScore Studio](https://musescore.org/en)**：免费开源，负责编辑、播放及导出乐谱和音频。
-- **一种能导出 MusicXML 的 OMR（光学乐谱识别）工具**：Halbestunde 只是其中一个选择，见下表。
+- **一种能导出 MusicXML 的 OMR（光学乐谱识别）工具**：从 PDF 开始时先检查本地环境。缺少可用工具时，agent 会说明有哪些可装、各自费用和对这类谱的识别表现，等你选好再协助安装。初稿由所选引擎生成，agent 随后对照 PDF 精校。
 - **PDF 查看／渲染工具**：如系统 PDF 查看器、Poppler 或 PyMuPDF，用于对照原谱和检查导出排版。
-- **Python 3.9+（可选）**：仅运行附带的 `inspect_score.py` 时需要；该脚本只用标准库。各 OMR 引擎可能有自己的额外依赖。
+- **Python 3.9+（可选）**：附带的安装自检和结构审计脚本只用标准库。各 OMR 引擎可能有自己的额外依赖。
 
-| OMR 工具 | 费用与适用方式 |
-|---|---|
-| [Halbestunde / Sheet Music Scanner](https://www.musehub.com/app/sheet-music-scanner) | 本次实际使用。付费桌面应用，经 MuseHub 安装与授权，识别后导出 MusicXML。 |
-| [Audiveris](https://github.com/Audiveris/audiveris) | 免费开源；可读取 PDF／扫描谱，提供桌面界面并导出 MusicXML。 |
-| [homr](https://github.com/liebharc/homr) | 免费开源；将乐谱图片或 PDF 转为 MusicXML，需要配置 Python 环境及模型依赖。 |
-| [oemer](https://github.com/BreezeWhite/oemer) | 免费开源；图片输入、MusicXML 输出，PDF 需先逐页渲染。原项目也推荐关注 homr。 |
-
-这三个免费工具是候选替代，尚未在本次合唱谱案例中实测。更换 OMR 后，仍需核对声部、小节、歌词和连线；初稿能打开不代表内容正确。
-
-**Halbestunde 买断优惠**：截至 **2026-11-03**，[MuseHub 官方页面](https://www.musehub.com/app/sheet-music-scanner)显示桌面版为一次性购买、非订阅，促销价 **US$24.99**，划线原价 **US$149.99**（约减 83%）。价格、地区税费和活动期限以购买时页面为准。
+Audiveris、homr 和 oemer 均有免费开源方案。Halbestunde 是本项目在合唱谱上实际用过的付费选项。2026-11-08 核查时，MuseHub 美国区桌面版的一次性买断促销价为 US$24.99，划线价 US$149.99。各地售价以购买时为准。安装说明列出了各工具的配置成本、多声部和歌词等校对要点，以及实测范围。[工具选择与识别表现](skills/pdf-to-mscz/INSTALL.md#选择乐谱识别工具) · [MuseHub 官方价格](https://www.musehub.com/app/sheet-music-scanner)
 
 ## 安装与使用
 
-下载本仓库，将完整的 `skills/pdf-to-mscz/` 文件夹放入 Codex 的技能目录，使其结构为 `~/.codex/skills/pdf-to-mscz/SKILL.md`。已有同名技能时先保留备份；其他安装位置和说明见 [INSTALL.md](skills/pdf-to-mscz/INSTALL.md)。
+下载本仓库，将完整的 `skills/pdf-to-mscz/` 文件夹放入 agent 的技能目录。Codex 的常用位置为 `~/.codex/skills/pdf-to-mscz/`。也可在新对话里请 agent 读取解压后的 `SKILL.md`。只复制主文件会遗漏操作参考和检查脚本。[安装方式与完整性自检](skills/pdf-to-mscz/INSTALL.md#安装后自检)
 
 然后把 PDF 交给 agent，例如：
 
-> 请用 $pdf-to-mscz 将这份 SATB 合唱 PDF 转成 MuseScore 乐谱，并做全谱精校。用 Halbestunde 识别，保留未修改的初稿。导出 MSCZ、MusicXML、MIDI、总谱 PDF，以及四条分声部 MP3 和一条合唱 MP3。音色用钢琴，速度四分音符 = 100；所有音频从第1小节开始，保留开头休止，不带节拍器。速度只用于导出，不添加到谱面。
+> 请用 $pdf-to-mscz 将这份 SATB 合唱 PDF 转成 MuseScore 乐谱，并做全谱精校。保留未修改的识别初稿。导出 MSCZ、MusicXML、MIDI、总谱 PDF，以及四条分声部 MP3 和一条合唱 MP3。音色用钢琴，速度四分音符 = 100；所有音频从第 1 小节开始，保留开头休止，不带节拍器。速度只用于导出，不添加到谱面。
 
 也可指定 Audiveris 等替代引擎，或直接提供已有的 MusicXML，从校对阶段继续。默认做全谱精校；只想要初稿时明确说明。MIDI 和音频按请求导出。
 
